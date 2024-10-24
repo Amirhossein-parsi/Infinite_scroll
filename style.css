@@ -1,3 +1,5 @@
+/*------------- general styling ----------*/
+
 *{
     padding: 0;
     margin: 0;
@@ -7,10 +9,47 @@
     font-size: 62.5%;
 }
 
+html{
+    box-sizing: border-box;
+}
+
+body{
+    background-color: whitesmoke;
+}
+
 img{
     height: 100%;
     width: 100%;
 }
+
+/*------------- general styling end ----------*/
+
+/*------------- general styling end ----------*/
+
+.loader{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.loader img{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 20rem;
+    height: 20rem;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+}
+
+/*------------- general styling end ----------*/
+
+/*------------- image styling ----------*/
 
 .images{
     margin: 2rem;
@@ -19,3 +58,5 @@ img{
 .images__item{
     margin: 1rem 0;
 }
+
+/*------------- image styling end ----------*/

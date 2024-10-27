@@ -1,19 +1,42 @@
-// defining the variables
+// api url
+
+const apiKey = 'Kz_nhIL_YyGZ9MKpc4_2Lll9Mk2gdP-z6OC9j19OEHo';
+
+// query selectors
 
 const imageContainer = document.querySelector('.images');
-const count = 10;
-const apiKey = 'Kz_nhIL_YyGZ9MKpc4_2Lll9Mk2gdP-z6OC9j19OEHo';
+const loader = document.querySelector('.loader');
+
+// defining the variables
+
 let photosArray = [];
+
+let ready = false;
+let imagesLoaded = 0;
+let totalImages = 0;
+const count = 30;
+let i = 0;
 
 // making the API URL
 
 const api = `https://api.unsplash.com/photos/?client_id=${apiKey}&count=${count}`;
 
-// fetching images
+// load images
+
+function loadImages() {
+    imagesLoaded++;
+    console.log(imagesLoaded);
+    if(imagesLoaded === totalImages){
+        ready = true;
+        loader.hidden = true;
+        console.log('Done loading images?', ready);
+    }
+};
+
+// displaying images
 
 function displayImages(){
 
-    console.log('kill me');
 
     photosArray.forEach((photo) => {
         // container
@@ -28,10 +51,12 @@ function displayImages(){
         images.setAttribute('src', photo.urls.regular);
         images.setAttribute('alt', photo.alt_description);
         
+        // event listeners
+        images.addEventListener('load', loadImages);
+
         // append
         links.appendChild(images);
         imageContainer.appendChild(links);
-        console.log('please PLEASE');
     });
 }
 
@@ -42,7 +67,7 @@ async function getImages() {
         const response = await fetch(api);
         photosArray = await response.json();
         console.log(photosArray);
-        console.log('HELP');
+        totalImages = photosArray.length;
         displayImages();
     } catch(error){
         alert('wooot do heeeeeell ooooo my godddd');
@@ -50,5 +75,13 @@ async function getImages() {
     }
 };
 
+window.addEventListener('scroll', function(){
+    if(window.scrollY + window.innerHeight >= document.body.offsetHeight - 1000 && ready) {
+        console.log('hi');
+        getImages();
+    };
+});
+
 // function calls
+
 getImages();
